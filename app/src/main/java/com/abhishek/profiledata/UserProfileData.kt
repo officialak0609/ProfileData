@@ -17,6 +17,7 @@ class UserProfileData {
             "Email Id" to email,
             "Mobile No." to mobileNo,
             "Address" to address
+
         )
             db.collection("Profiles")
                 .document(email).set(data)
