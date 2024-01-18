@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "739776166390",
+    "project_id": "profile-data-abf32",
+    "storage_bucket": "profile-data-abf32.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:739776166390:android:b5a31290ed867f0d2fafd7",
+        "android_client_info": {
+          "package_name": "com.abhishek.profiledata"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJinAG_lwlk7Ji944Wof5puhbEl25LRbg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
