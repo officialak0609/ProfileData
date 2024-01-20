@@ -4,7 +4,7 @@ import androidx.compose.runtime.mutableStateOf
 
 data class Profile(
     var name : String = "",
-    var age : Int = 0,
+    var age : String = "",
     var email : String = "",
     var mobile : String = "",
     var address : String = ""

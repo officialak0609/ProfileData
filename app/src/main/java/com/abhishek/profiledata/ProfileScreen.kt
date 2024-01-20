@@ -42,6 +42,7 @@ fun ProfileScreen(
                 .fillMaxWidth()
                 .padding(20.dp),
             verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
 
             ) {
 
@@ -54,10 +55,10 @@ fun ProfileScreen(
                     label = { Text("Name") }
                 )
                 TextField(
-                    value = mainViewModel.viewProfile.value.age.toString(),
+                    value = mainViewModel.viewProfile.value.age,
                     onValueChange = {
                         mainViewModel.viewProfile.value = mainViewModel.profile.value.copy(
-                            age = it.toInt())},
+                            age = it)},
                     label = { Text("Age") }
                 )
                 TextField(

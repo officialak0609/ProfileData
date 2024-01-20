@@ -46,6 +46,7 @@ fun ProfileData(mainViewModel: ProfileViewModel,
                 .fillMaxWidth()
                 .padding(20.dp),
             verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
 
             ) {
 
@@ -60,10 +61,10 @@ fun ProfileData(mainViewModel: ProfileViewModel,
 
                 )
                 TextField(
-                    value = mainViewModel.profile.value.age.toString(),
+                    value = mainViewModel.profile.value.age,
                     onValueChange = {
                         mainViewModel.profile.value = mainViewModel.profile.value.copy(
-                        age = it.toInt())},
+                        age = it)},
                     label = { Text("Age") }
                 )
                 TextField(
@@ -88,7 +89,6 @@ fun ProfileData(mainViewModel: ProfileViewModel,
         }
         Spacer(modifier = Modifier.heightIn(30.dp))
         Button(onClick = {
-            navController.navigate("Profile_screen")
             mainViewModel.save() },
             modifier = Modifier
                 .height(50.dp)
@@ -96,6 +96,15 @@ fun ProfileData(mainViewModel: ProfileViewModel,
         ) {
             Text(text = "Save", color = Color.White )
 
+        }
+        Spacer(modifier = Modifier.heightIn(30.dp))
+        Button(onClick = {
+            navController.navigate("Profile_screen") },
+            modifier = Modifier
+                .height(50.dp)
+                .width(150.dp)
+        ) {
+            Text(text = "Next", color = Color.White)
         }
     }
 }

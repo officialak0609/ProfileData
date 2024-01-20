@@ -10,7 +10,7 @@ class UserServerRepo {
     val db = Firebase.firestore
 
     @SuppressLint("SuspiciousIndentation")
-    fun saveUserData(name: String, age: Int, email: String, mobileNo: String, address: String) {
+    fun saveUserData(name: String, age: String, email: String, mobileNo: String, address: String) {
         Log.e("ABC","Inside Firebase Repo Function $email")
         val data = hashMapOf(
             "Name" to name,
@@ -27,15 +27,14 @@ class UserServerRepo {
     }
 
     suspend fun getProfileData(email: String): Profile? {
-           val profile = db.collection("Profile").document("jaipur")
+           return db.collection("Profiles").document(email)
                 .get()
                 .addOnSuccessListener {
                     Log.d("ABC", "DocumentSnapshot Fetch successfully ! ${it.data}")
+                    Log.d("ABC", "DocumentSnapshot Fetch successfully ! ${email}")
                 }
                 .addOnFailureListener { e -> Log.w("ABCD", "Error writing document", e) }
                .await()
                .toObject(Profile::class.java)
-
-        return profile
     }
 }
