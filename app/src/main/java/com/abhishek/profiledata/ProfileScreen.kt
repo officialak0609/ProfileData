@@ -17,22 +17,18 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.semantics.Role.Companion.Button
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.viewModelFactory
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileData(mainViewModel: ProfileViewModel,
-                navController:NavController) {
-
+fun ProfileScreen(
+    mainViewModel: ProfileViewModel,
+    navController: NavHostController
+             ) {
     Column (horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top,
         modifier = Modifier.fillMaxWidth()) {
@@ -40,7 +36,7 @@ fun ProfileData(mainViewModel: ProfileViewModel,
             colors = TopAppBarDefaults.topAppBarColors(
                 containerColor = MaterialTheme.colorScheme.primaryContainer,
                 titleContentColor = MaterialTheme.colorScheme.primary,),
-            title = { Text(text = "Profile Data",color = Color.Magenta,) },)
+            title = { Text(text = "Profile Screen",color = Color.Magenta,) },)
         Row (
             modifier = Modifier
                 .fillMaxWidth()
@@ -51,36 +47,34 @@ fun ProfileData(mainViewModel: ProfileViewModel,
 
             Column {
                 TextField(
-                    value = mainViewModel.profile.value.name ,
+                    value = mainViewModel.viewProfile.value.name,
                     onValueChange = {
-                        mainViewModel.profile.value = mainViewModel.profile.value.copy(
-                            name = it
-                        ) },
+                        mainViewModel.viewProfile.value = mainViewModel.profile.value.copy(
+                            name = it) },
                     label = { Text("Name") }
-
                 )
                 TextField(
-                    value = mainViewModel.profile.value.age.toString(),
+                    value = mainViewModel.viewProfile.value.age.toString(),
                     onValueChange = {
-                        mainViewModel.profile.value = mainViewModel.profile.value.copy(
-                        age = it.toInt())},
+                        mainViewModel.viewProfile.value = mainViewModel.profile.value.copy(
+                            age = it.toInt())},
                     label = { Text("Age") }
                 )
                 TextField(
-                    value = mainViewModel.profile.value.address,
-                    onValueChange = {mainViewModel.profile.value = mainViewModel.profile.value.copy(
+                    value = mainViewModel.viewProfile.value.address,
+                    onValueChange = {mainViewModel.viewProfile.value= mainViewModel.profile.value.copy(
                         address = it)},
                     label = { Text("Address") }
                 )
                 TextField(
-                    value = mainViewModel.profile.value.email,
-                    onValueChange = {mainViewModel.profile.value = mainViewModel.profile.value.copy(
-                        email = it)},
+                    value = mainViewModel.viewProfile.value.email,
+                    onValueChange = {mainViewModel.viewProfile.value = mainViewModel.profile.value.copy(
+                            email = it)},
                     label = { Text("Email") }
                 )
                 TextField(
-                    value = mainViewModel.profile.value.mobile,
-                    onValueChange = { mainViewModel.profile.value = mainViewModel.profile.value.copy(
+                    value = mainViewModel.viewProfile.value.mobile,
+                    onValueChange = { mainViewModel.viewProfile.value = mainViewModel.profile.value.copy(
                         mobile = it)},
                     label = { Text("Mobile") }
                 )
@@ -88,13 +82,12 @@ fun ProfileData(mainViewModel: ProfileViewModel,
         }
         Spacer(modifier = Modifier.heightIn(30.dp))
         Button(onClick = {
-            navController.navigate("Profile_screen")
-            mainViewModel.save() },
+            mainViewModel.getProfileData() },
             modifier = Modifier
                 .height(50.dp)
                 .width(150.dp)
         ) {
-            Text(text = "Save", color = Color.White )
+            Text(text = "Fatch", color = Color.White )
 
         }
     }
