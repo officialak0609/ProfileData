@@ -8,8 +8,8 @@ import kotlinx.coroutines.launch
 
 class ProfileViewModel : ViewModel() {
     var profile = mutableStateOf(Profile())
-    var viewProfile = mutableStateOf(Profile())
-    var userServerRepo = UserServerRepo()
+
+    private var userServerRepo = UserServerRepo()
 
     fun save() {
         Log.e("ABC", "Inside View Model Function")
@@ -21,18 +21,16 @@ class ProfileViewModel : ViewModel() {
             mobileNo = profile.value.mobile
         )
     }
-
     fun getProfileData() {
         Log.e("ABC", "Inside View Model Function")
         viewModelScope.launch {
             userServerRepo.getProfileData(profile.value.email).also {
+                Log.e("ABC", "It Value Name ${it?.name}")
                 if (it != null) {
-                    viewProfile.value = it
-                    Log.e("ABC", "View Model. Value ${viewProfile.value}")
+                    profile.value = it
+                    Log.e("ABC", "View Model. Value ${profile.value}")
                     Log.e("ABC", "It Value  ${it}")
-
                 }
-
             }
         }
     }

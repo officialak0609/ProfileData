@@ -18,12 +18,12 @@ class UserServerRepo {
             "Email Id" to email,
             "Mobile No." to mobileNo,
             "Address" to address
-
         )
             db.collection("Profiles")
                 .document(email).set(data)
                 .addOnSuccessListener { Log.e("ABCD", "DocumentSnapshot successfully written!") }
                 .addOnFailureListener { e -> Log.e("ABCDE", "Error writing document", e) }
+
     }
 
     suspend fun getProfileData(email: String): Profile? {
@@ -31,7 +31,8 @@ class UserServerRepo {
                 .get()
                 .addOnSuccessListener {
                     Log.d("ABC", "DocumentSnapshot Fetch successfully ! ${it.data}")
-                    Log.d("ABC", "DocumentSnapshot Fetch successfully ! ${email}")
+                    Log.d("ABC", "DocumentSnapshot Fetch successfully ! $email")
+
                 }
                 .addOnFailureListener { e -> Log.w("ABCD", "Error writing document", e) }
                .await()

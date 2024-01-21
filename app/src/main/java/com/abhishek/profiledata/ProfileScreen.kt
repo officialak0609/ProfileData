@@ -48,35 +48,30 @@ fun ProfileScreen(
 
             Column {
                 TextField(
-                    value = mainViewModel.viewProfile.value.name,
+                    value = mainViewModel.profile.value.name,
                     onValueChange = {
-                        mainViewModel.viewProfile.value = mainViewModel.profile.value.copy(
-                            name = it) },
+                        mainViewModel.profile.value = mainViewModel.profile.value },
                     label = { Text("Name") }
                 )
                 TextField(
-                    value = mainViewModel.viewProfile.value.age,
+                    value = mainViewModel.profile.value.age,
                     onValueChange = {
-                        mainViewModel.viewProfile.value = mainViewModel.profile.value.copy(
-                            age = it)},
+                        mainViewModel.profile.value = mainViewModel.profile.value},
                     label = { Text("Age") }
                 )
                 TextField(
-                    value = mainViewModel.viewProfile.value.address,
-                    onValueChange = {mainViewModel.viewProfile.value= mainViewModel.profile.value.copy(
-                        address = it)},
+                    value = mainViewModel.profile.value.address,
+                    onValueChange = {mainViewModel.profile.value= mainViewModel.profile.value},
                     label = { Text("Address") }
                 )
                 TextField(
-                    value = mainViewModel.viewProfile.value.email,
-                    onValueChange = {mainViewModel.viewProfile.value = mainViewModel.profile.value.copy(
-                            email = it)},
+                    value = mainViewModel.profile.value.email,
+                    onValueChange = {mainViewModel.profile.value = mainViewModel.profile.value},
                     label = { Text("Email") }
                 )
                 TextField(
-                    value = mainViewModel.viewProfile.value.mobile,
-                    onValueChange = { mainViewModel.viewProfile.value = mainViewModel.profile.value.copy(
-                        mobile = it)},
+                    value = mainViewModel.profile.value.mobile,
+                    onValueChange = { mainViewModel.profile.value = mainViewModel.profile.value},
                     label = { Text("Mobile") }
                 )
             }
@@ -88,8 +83,18 @@ fun ProfileScreen(
                 .height(50.dp)
                 .width(150.dp)
         ) {
-            Text(text = "Fatch", color = Color.White )
+            Text(text = "Fetch Data", color = Color.White )
 
+        }
+
+        Spacer(modifier = Modifier.heightIn(30.dp))
+        Button(onClick = {
+            mainViewModel.getProfileData() },
+            modifier = Modifier
+                .height(50.dp)
+                .width(150.dp)
+        ) {
+            Text(text = "Home", color = Color.White)
         }
     }
 }
