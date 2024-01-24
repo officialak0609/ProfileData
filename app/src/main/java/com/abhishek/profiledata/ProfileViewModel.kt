@@ -1,15 +1,18 @@
 package com.abhishek.profiledata
 
 import android.util.Log
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 
 class ProfileViewModel : ViewModel() {
-    var profile = mutableStateOf(Profile())
 
+    var profile = mutableStateOf(Profile())
     private var userServerRepo = UserServerRepo()
+    var userList = mutableStateOf(listOf(Profile()))
 
     fun save() {
         Log.e("ABC", "Inside View Model Function")
@@ -21,18 +24,18 @@ class ProfileViewModel : ViewModel() {
             mobileNo = profile.value.mobile
         )
     }
-    fun getProfileData() {
-        Log.e("ABC", "Inside View Model Function")
+    fun getProfileData(){
         viewModelScope.launch {
-            userServerRepo.getProfileData(profile.value.email).also {
-                Log.e("ABC", "It Value Name ${it?.name}")
-                if (it != null) {
-                    profile.value = it
-                    Log.e("ABC", "View Model. Value ${profile.value}")
-                    Log.e("ABC", "It Value  ${it}")
-                }
+            Log.e("LIST", userList.value.toString())
+            userServerRepo.getProfileData().also {
+                userList.value = it
+                Log.e("LIST", userList.value.toString())
+
             }
+
         }
+
     }
 }
+
 
