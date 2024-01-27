@@ -13,6 +13,7 @@ class ProfileViewModel : ViewModel() {
     var profile = mutableStateOf(Profile())
     private var userServerRepo = UserServerRepo()
     var userList = mutableStateOf(listOf(Profile()))
+    var submit = mutableStateOf(false)
 
     fun save() {
         Log.e("ABC", "Inside View Model Function")

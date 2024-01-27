@@ -1,4 +1,5 @@
 package com.abhishek.profiledata
+import ChatViewModel
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -43,6 +44,12 @@ class MainActivity : ComponentActivity() {
                                 profileViewModel = profileViewModel,
                                 navController = navController
                             )
+                        }
+                       composable("chat_screen") {
+                           ChatScreen(
+                               chatViewModel = ChatViewModel(),
+                               navController = navController
+                           )
                         }
                         composable("edit_screen") {
                             EditProfileScreen(

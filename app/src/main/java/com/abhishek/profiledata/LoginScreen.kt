@@ -71,7 +71,7 @@ fun LoginScreen(
         )
         {
             Image(
-            painter = painterResource(id = R.drawable.google),
+            painter = painterResource(id = R.drawable.google_image),
             contentDescription = ""
         )
             Text(text = "Sign in with Google", color = Color.Black, modifier = Modifier.padding(6.dp)

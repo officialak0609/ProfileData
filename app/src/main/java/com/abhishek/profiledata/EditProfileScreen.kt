@@ -8,6 +8,7 @@ import android.provider.MediaStore
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,6 +22,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -133,8 +135,10 @@ fun EditProfileScreen(profileViewModel: ProfileViewModel,
             }
         }
         Spacer(modifier = Modifier.heightIn(10.dp))
-        Button(onClick = {
-            profileViewModel.save() },
+        Button(onClick = {  profileViewModel.submit.value = true
+            profileViewModel.getProfileData()
+            profileViewModel.save()
+            navController.navigate("home_screen")},
 
             modifier = Modifier
                 .height(50.dp)
@@ -142,17 +146,17 @@ fun EditProfileScreen(profileViewModel: ProfileViewModel,
         ) {
             Text(text = "Save", color = Color.White )
         }
-        Spacer(modifier = Modifier.heightIn(10.dp))
-        Button(onClick = {
-            navController.navigate("home_screen")
-            profileViewModel.getProfileData()
-                         },
-
-            modifier = Modifier
-                .height(50.dp)
-                .width(150.dp)
-        ) {
-            Text(text = "Next", color = Color.White )
+        if(profileViewModel.submit.value){
+            AlertDialog(
+                onDismissRequest = { profileViewModel.submit.value = false },
+                confirmButton = {
+                    Text(text = "OK",
+                        modifier = Modifier.clickable {
+                            profileViewModel.submit.value = false
+                        })
+                }
+                , text =  { Text(text = "Submitted successfully!!") }
+            )
         }
     }
 }
